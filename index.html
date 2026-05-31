@@ -1,0 +1,473 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .wrap {
+    font-family: 'Sarabun', sans-serif;
+    padding: 2rem 1.5rem;
+    max-width: 720px;
+    margin: 0 auto;
+    background: #FFFFFF;
+    border-radius: 20px;
+    border: 1px solid #EEEEEE;
+  }
+
+  /* ---------- Header ---------- */
+  .header { text-align: center; margin-bottom: 2rem; }
+
+  .brandmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 14px;
+  }
+  .brandmark .dot {
+    width: 14px; height: 14px;
+    background: #DC2626;
+    border-radius: 4px;
+  }
+  .brandmark span {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    color: #DC2626;
+    text-transform: uppercase;
+  }
+
+  .header-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #DC2626;
+    background: #FEE2E2;
+    border-radius: 999px;
+    padding: 4px 14px;
+    margin-bottom: 10px;
+  }
+
+  .header h1 {
+    font-family: 'Sarabun', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: #1A1A1A;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+
+  .header p { font-size: 13px; color: #555555; line-height: 1.7; }
+
+  /* ---------- Cards ---------- */
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 22px;
+  }
+
+  .card { border-radius: 16px; overflow: hidden; }
+
+  /* Elite = filled red hero card */
+  .card.elite {
+    background: linear-gradient(160deg, #DC2626 0%, #B91C1C 100%);
+    box-shadow: 0 10px 24px rgba(220,38,38,0.22);
+  }
+  /* Development = white card with red outline */
+  .card.dev {
+    background: #FFFFFF;
+    border: 1.5px solid #FCA5A5;
+  }
+
+  .card-header { padding: 1.25rem 1.25rem 1rem; }
+  .card.elite .card-header { border-bottom: 1px solid rgba(255,255,255,0.18); }
+  .card.dev   .card-header { border-bottom: 1px solid #F1E3E3; }
+
+  /* reserved eyebrow zone so both card headers align vertically */
+  .eyebrow-zone { min-height: 27px; }
+
+  .card-tagline {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .card.elite .card-tagline { color: #FECACA; }
+  .card.dev   .card-tagline { color: #DC2626; }
+
+  .card-title {
+    font-family: 'Sarabun', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 3px;
+  }
+  .card.elite .card-title { color: #FFFFFF; }
+  .card.dev   .card-title { color: #1A1A1A; }
+
+  .card-sub { font-size: 12px; line-height: 1.5; }
+  .card.elite .card-sub { color: rgba(255,255,255,0.85); }
+  .card.dev   .card-sub { color: #6A6A6A; }
+
+  /* ---------- Price ---------- */
+  .price-row { padding: 1rem 1.25rem; }
+  .card.elite .price-row { border-bottom: 1px solid rgba(255,255,255,0.18); }
+  .card.dev   .price-row { border-bottom: 1px solid #F1E3E3; }
+
+  .price-main {
+    font-family: 'Sarabun', sans-serif;
+    font-size: 25px;
+    font-weight: 800;
+  }
+  .card.elite .price-main { color: #FFFFFF; }
+  .card.dev   .price-main { color: #DC2626; }
+
+  .price-unit { font-size: 13px; margin-left: 4px; }
+  .card.elite .price-unit { color: rgba(255,255,255,0.8); }
+  .card.dev   .price-unit { color: #888888; }
+
+  .price-note { font-size: 11px; margin-top: 3px; line-height: 1.5; }
+  .card.elite .price-note { color: rgba(255,255,255,0.78); }
+  .card.dev   .price-note { color: #888888; }
+
+  .price-total { font-size: 12px; font-weight: 700; color: #DC2626; margin-top: 5px; }
+
+  /* ---------- Starter reassurance note (Development card) ---------- */
+  .starter-note {
+    background: #F8F5F0;
+    border-left: 3px solid #DC2626;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #555555;
+  }
+  .starter-note strong { color: #DC2626; }
+
+  /* ---------- Elite condition note (filled red card) ---------- */
+  .elite-note {
+    background: #FFFFFF;
+    border-left: 3px solid #B91C1C;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #555555;
+  }
+  .elite-note strong { color: #DC2626; }
+
+  .prereq-pill {
+    display: inline-block;
+    background: #DC2626;
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin: 0 2px;
+    white-space: nowrap;
+  }
+
+  /* ---------- Benefits ---------- */
+  .benefits { padding: 1rem 1.25rem; }
+
+  .benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 9px;
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+  .benefit-item:last-child { margin-bottom: 0; }
+  .card.elite .benefit-item { color: rgba(255,255,255,0.95); }
+  .card.dev   .benefit-item { color: #2A2A2A; }
+  .card.elite .benefit-item strong { color: #FFFFFF; }
+  .card.dev   .benefit-item strong { color: #1A1A1A; }
+
+  .check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .card.elite .check { background: #FFFFFF; color: #DC2626; }
+  .card.dev   .check { background: #FEE2E2; color: #DC2626; }
+
+  .badge-rec {
+    display: inline-block;
+    background: #FFFFFF;
+    color: #DC2626;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+
+  .upgrade-pill {
+    display: inline-block;
+    background: #FEE2E2;
+    color: #B91C1C;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-left: 4px;
+  }
+
+  .no-precomp-pill {
+    display: inline-block;
+    background: #FFFFFF;
+    color: #DC2626;
+    border: 1px solid #FCA5A5;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-left: 4px;
+  }
+
+  /* ---------- Section title ---------- */
+  .section-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #888888;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 12px;
+  }
+
+  /* ---------- Compare table ---------- */
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 16px; }
+
+  .compare-table th {
+    background: #F8F5F0;
+    color: #555555;
+    font-weight: 700;
+    padding: 8px 12px;
+    text-align: left;
+    font-size: 12px;
+  }
+  .compare-table th:not(:first-child) { text-align: center; }
+  .compare-table td { padding: 8px 12px; border-bottom: 1px solid #EEEEEE; color: #2A2A2A; vertical-align: middle; }
+  .compare-table td:not(:first-child) { text-align: center; }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table .row-label { color: #888888; font-size: 12px; }
+
+  .val-elite { color: #DC2626; font-weight: 700; }
+  .val-dev   { color: #1A1A1A; font-weight: 700; }
+  .dot-no    { color: #DDDDDD; font-size: 14px; }
+
+  /* ---------- Focus table ---------- */
+  .focus-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 16px; }
+
+  .focus-table th {
+    padding: 8px 10px;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .focus-table th:first-child { background: #F8F5F0; color: #555555; text-align: left; }
+  .focus-table th.th-elite { background: #DC2626; color: #FFFFFF; text-align: center; }
+  .focus-table th.th-dev   { background: #FEE2E2; color: #B91C1C; text-align: center; }
+
+  .focus-table td { padding: 7px 10px; border-bottom: 1px solid #EEEEEE; vertical-align: middle; }
+  .focus-table td:first-child { color: #6A6A6A; font-size: 12px; }
+  .focus-table td:not(:first-child) { text-align: center; }
+  .focus-table tr:last-child td { border-bottom: none; }
+
+  .focus-bar-wrap { display: flex; align-items: center; justify-content: center; gap: 6px; }
+  .focus-bar { height: 8px; border-radius: 99px; }
+  .focus-bar.elite { background: #DC2626; }
+  .focus-bar.dev   { background: #FCA5A5; }
+  .focus-label { font-size: 11px; font-weight: 700; white-space: nowrap; }
+  .focus-label.elite { color: #DC2626; }
+  .focus-label.dev   { color: #B91C1C; }
+
+  /* ---------- Notes ---------- */
+  .coach-note {
+    background: #F8F5F0;
+    border: 1px solid #EEEEEE;
+    border-left: 3px solid #DC2626;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #555555;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .coach-note strong { color: #1A1A1A; }
+  .coach-note .ico { color: #DC2626; flex-shrink: 0; margin-top: 1px; }
+
+  .footer-note {
+    padding: 12px 16px;
+    background: #F8F5F0;
+    border-radius: 12px;
+    border: 1px solid #EEEEEE;
+    border-top: 3px solid #DC2626;
+    font-size: 12px;
+    color: #555555;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  @media (max-width: 480px) {
+    .cards { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="wrap">
+  <h2 class="sr-only" style="position:absolute;left:-9999px;">VEX IQ Competition Program 2026–2027 — รายละเอียดรับสมัครทั้งสองทีม</h2>
+
+  <div class="header">
+    <div class="brandmark"><span class="dot"></span><span>CODELAB</span></div>
+    <span class="header-badge">VEX IQ Competition Program 2026–2027</span>
+    <h1>เลือกเส้นทางที่ใช่ สู่สนามแข่งขันจริง</h1>
+    <p>ทุกทีมได้ลงแข่งขันจริง ได้เรียนรู้การทำงานเป็นทีม และพัฒนาทักษะวิศวกรรมเช่นเดียวกัน<br>ความแตกต่างอยู่ที่ระดับความเข้มข้นของการฝึกซ้อมและการสนับสนุนจากโค้ช</p>
+  </div>
+
+  <div class="cards">
+    <div class="card elite">
+      <div class="card-header">
+        <div class="eyebrow-zone"><span class="badge-rec">แนะนำสำหรับผู้มีเป้าหมายจริงจัง</span></div>
+        <div class="card-tagline">Competition Elite Team</div>
+        <div class="card-title">Train to Win</div>
+        <div class="card-sub">เส้นทางพัฒนาสู่การแข่งขันระดับสูง</div>
+      </div>
+      <div class="price-row">
+        <span class="price-main">79,900</span><span class="price-unit">บาท</span>
+        <div class="price-note">รวมค่าลงทะเบียนทีม + ค่าลงแข่ง 2 สนามหลักแล้ว</div>
+      </div>
+      <div class="benefits">
+        <div class="elite-note"><strong>สำหรับผู้พร้อมแข่งขันจริงจัง</strong> — เส้นทางเข้มข้นเต็มรูปแบบสำหรับน้อง ๆ ที่มีพื้นฐานและตั้งเป้าผลงานในสนามระดับสูง ผู้สมัครต้องผ่าน Precompetition ก่อน <span class="prereq-pill">Precompetition Required</span> เพื่อยืนยันความพร้อมด้านการสร้างหุ่นยนต์ การเขียนโปรแกรม และการทำงานเป็นทีม ก่อนเข้าสู่ตารางฝึกซ้อมแบบเข้มข้น</div>
+        <div class="benefit-item"><span class="check">&#10003;</span>ฝึกซ้อม <strong>4 ชั่วโมง/สัปดาห์</strong> + ออนไลน์มีตติ้ง 1 ชม.</div>
+        <div class="benefit-item"><span class="check">&#10003;</span>โค้ช 1 คน ดูแล<strong>ไม่เกิน 2 ทีม</strong></div>
+        <div class="benefit-item"><span class="check">&#10003;</span>ซ้อมนอกเวลาได้<strong>ไม่จำกัด</strong></div>
+        <div class="benefit-item"><span class="check">&#10003;</span>คำแนะนำเชิงลึก: Robot Design, Programming, Strategy, Engineering Notebook</div>
+        <div class="benefit-item"><span class="check">&#10003;</span>ติดตามเป้าหมายและพัฒนาการทีมอย่างต่อเนื่อง</div>
+      </div>
+    </div>
+
+    <div class="card dev">
+      <div class="card-header">
+        <div class="eyebrow-zone"></div>
+        <div class="card-tagline">Competition Development Team</div>
+        <div class="card-title">Start Your Journey</div>
+        <div class="card-sub">เริ่มต้นการแข่งขันและสะสมประสบการณ์จริง</div>
+      </div>
+      <div class="price-row">
+        <span class="price-main">29,900</span><span class="price-unit">บาท</span>
+        <div class="price-note">+ ค่าลงทะเบียนทีม + ค่าแข่ง 2 สนาม<br>(รวมประมาณ <strong style="color:#DC2626;">~5,000 บาท</strong>)</div>
+        <div class="price-total">รวมทั้งหมดประมาณ ~34,900 บาท</div>
+      </div>
+      <div class="benefits">
+        <div class="starter-note"><strong>เริ่มจากศูนย์ได้</strong> — ไม่จำเป็นต้องมีพื้นฐานมาก่อน แผนการแข่งขันนี้ออกแบบสำหรับน้อง ๆ ที่สนใจการแข่งขันโดยเฉพาะ คุณครูจะเริ่มปูพื้นฐานไปพร้อมกันแบบ Step by Step</div>
+        <div class="benefit-item"><span class="check">&#10003;</span>ฝึกซ้อม <strong>2 ชั่วโมง/สัปดาห์</strong> พร้อมโค้ชดูแลโดยตรง</div>
+        <div class="benefit-item"><span class="check">&#10003;</span>โค้ช 1 คน ดูแล<strong>ไม่เกิน 4 ทีม</strong> (โฟกัสครั้งละ 1 ทีม)</div>
+        <div class="benefit-item"><span class="check">&#10003;</span><span><strong>ไม่จำเป็นต้องผ่าน Precompetition</strong> — เข้าสู่สนามแข่งจริงได้เลย <span class="no-precomp-pill">No Precomp Required</span></span></div>
+        <div class="benefit-item"><span class="check">&#10003;</span>ลงแข่งในสนามเดียวกับทีม Elite</div>
+        <div class="benefit-item"><span class="check">&#10003;</span>เข้าร่วม Scrimmage และแข่งภายในกับรุ่นพี่ฟรี</div>
+        <div class="benefit-item"><span class="check">&#10003;</span>เรียนรู้ครบ: สร้างหุ่นยนต์ เขียนโปรแกรม ขับ วางแผน และการทำงานเป็นทีม</div>
+        <div class="benefit-item"><span class="check">&#10003;</span>อัปเกรดเป็น Elite Team ได้ระหว่างฤดูกาล <span class="upgrade-pill">Upgradeable</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-bottom:10px;">ชั่วโมงการฝึกซ้อมโฟกัส (ต่อสัปดาห์)</div>
+
+  <div class="coach-note">
+    <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01"></path><path d="M11 12h1v4h1"></path></svg>
+    <span>ในทุกช่วงเวลาฝึกซ้อมโฟกัส โค้ชจะดูแล<strong>ครั้งละ 1 ทีมเท่านั้น</strong> — Elite ดูแลไม่เกิน 2 ทีม / Development ดูแลไม่เกิน 4 ทีม สลับกันในช่วงเวลาต่าง ๆ</span>
+  </div>
+
+  <table class="focus-table" style="margin-bottom:20px;">
+    <thead>
+      <tr>
+        <th>รายการ</th>
+        <th class="th-elite">Elite</th>
+        <th class="th-dev">Development</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>ซ้อมโฟกัสประจำสัปดาห์</td>
+        <td>
+          <div class="focus-bar-wrap">
+            <div class="focus-bar elite" style="width:60px;"></div>
+            <span class="focus-label elite">4 ชม.</span>
+          </div>
+        </td>
+        <td>
+          <div class="focus-bar-wrap">
+            <div class="focus-bar dev" style="width:30px;"></div>
+            <span class="focus-label dev">2 ชม.</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Online Meeting</td>
+        <td>
+          <div class="focus-bar-wrap">
+            <div class="focus-bar elite" style="width:15px;"></div>
+            <span class="focus-label elite">1 ชม.</span>
+          </div>
+        </td>
+        <td><span class="dot-no">—</span></td>
+      </tr>
+      <tr>
+        <td>ซ้อมนอกเวลา (เพิ่มเติม)</td>
+        <td><span class="val-elite">ไม่จำกัด</span></td>
+        <td><span class="val-dev">ตามรอบที่กำหนด</span></td>
+      </tr>
+      <tr>
+        <td>โค้ชดูแลสูงสุด</td>
+        <td><span class="val-elite">ไม่เกิน 2 ทีม</span></td>
+        <td><span class="val-dev">ไม่เกิน 4 ทีม</span></td>
+      </tr>
+      <tr>
+        <td>โฟกัสระหว่างซ้อม</td>
+        <td><span class="val-elite">ครั้งละ 1 ทีม</span></td>
+        <td><span class="val-dev">ครั้งละ 1 ทีม</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="section-title">เปรียบเทียบสิ่งที่ได้รับ</div>
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>รายการ</th>
+        <th>Elite</th>
+        <th>Development</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="row-label">ราคารวมโดยประมาณ</td><td class="val-elite">79,900 บาท</td><td class="val-dev">~34,900 บาท</td></tr>
+      <tr><td class="row-label">ค่าลงแข่ง 2 สนาม</td><td class="val-elite">รวมแล้ว</td><td class="val-dev">รวมใน ~5,000</td></tr>
+      <tr><td class="row-label">ต้องผ่าน Precompetition</td><td class="val-elite">ใช่</td><td style="color:#DC2626; font-weight:700;">ไม่จำเป็น</td></tr>
+      <tr><td class="row-label">อัตราส่วนโค้ช</td><td class="val-elite">1 : ≤2 ทีม</td><td class="val-dev">1 : ≤4 ทีม</td></tr>
+      <tr><td class="row-label">Scrimmage ภายใน</td><td class="val-elite">มี</td><td class="val-dev">มี</td></tr>
+      <tr><td class="row-label">สิทธิ์อัปเกรด</td><td><span class="dot-no">—</span></td><td class="val-dev">อัปเกรดได้</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer-note">
+    ไม่ว่าจะเริ่มจากเส้นทางใด ทุกทีมได้ลงแข่งขันจริง ได้เรียนรู้การทำงานเป็นทีม และพัฒนาทักษะวิศวกรรม การเขียนโปรแกรม และการแก้ปัญหาเช่นเดียวกัน
+  </div>
+</div>
